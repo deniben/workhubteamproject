@@ -1,0 +1,92 @@
+.frm {
+    width: 40%;
+    margin-top: 5%;
+    margin-left: 34%;
+  }
+
+      .card {
+          box-shadow: 6px 6px 8px 4px rgba(5, 5, 5, 0.2);
+          max-width: 200px;
+          margin: auto;
+          text-align:left;
+          display: inline-block;
+          margin-left: 20px;
+          height: 360px;
+          border:khaki;
+
+        }
+
+        .title {
+          color: grey;
+          font-size: 18px;
+        }
+
+        .parametry{
+          margin: auto;
+
+          height: 500px;
+          width: 70%;
+          margin-top: 10%;
+          margin-left: 18%;
+
+        }
+
+        .imig{
+          height: 10px;
+          width: 100%;
+        }
+
+        button {
+          border: none;
+          outline: 0;
+          display: inline-block;
+          padding: 8px;
+          color: white;
+          background-color: #000;
+          text-align: center;
+          cursor: pointer;
+          width: 100%;
+          font-size: 18px;
+          border-radius: 10%;
+          cursor: pointer;
+        }
+        .but{
+          margin-top: 20px;
+          margin-left: 25%;
+          width: 50%;
+        }
+        /* a {
+          text-decoration: none;
+          font-size: 22px;
+          color: black;
+        } */
+
+        button:hover, a:hover {
+          opacity: 0.7;
+        }
+
+        input[type=submit] {
+    width: 92%;
+    background-color: rgb(5, 8, 5);
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  input[type=chakbox] {
+    width: 100%;
+    background-color: rgb(5, 8, 5);
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  input[type=submit]:hover {
+    background-color: #3f413f;
+  }

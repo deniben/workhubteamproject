@@ -1,0 +1,95 @@
+plugins {
+    id 'java'
+    id 'org.liquibase.gradle' version '2.0.0'
+}
+
+group 'com.spring'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'war'
+apply plugin: "org.liquibase.gradle"
+
+war {
+    archiveName = 'WorkHub.war'
+}
+
+sourceCompatibility = 1.8
+
+configurations {
+    liquibase
+    sqlDriver
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'org.testng', name: 'testng', version: '7.0.0-beta7'
+    compile group: 'javax.annotation', name: 'javax.annotation-api', version: '1.3.2'
+    compile group: 'net.coobird', name: 'thumbnailator', version: '0.4.8'
+    compile group: 'org.springframework', name: 'spring-core', version: '5.1.8.RELEASE'
+    compile group: 'org.springframework', name: 'spring-web', version: '5.1.8.RELEASE'
+    compile group: 'org.springframework', name: 'spring-webmvc', version: '5.1.8.RELEASE'
+    compile group: 'org.springframework', name: 'spring-tx', version: '5.1.8.RELEASE'
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.9.9'
+    compile group: 'javax.servlet', name: 'javax.servlet-api', version: '3.1.0'
+    compile group: 'org.hibernate', name: 'hibernate-entitymanager', version: '5.4.3.Final'
+    compile group: 'org.postgresql', name: 'postgresql', version: '42.2.6'
+    compile group: 'org.springframework', name: 'spring-orm', version: '5.1.8.RELEASE'
+    compile group: 'org.springframework.security', name: 'spring-security-core', version: '5.1.5.RELEASE'
+    compile group: 'org.springframework.security', name: 'spring-security-web', version: '5.1.5.RELEASE'
+    compile group: 'org.springframework.security', name: 'spring-security-config', version: '5.1.5.RELEASE'
+    compile group: 'io.jsonwebtoken', name: 'jjwt-api', version: '0.10.6'
+    runtime group: 'io.jsonwebtoken', name: 'jjwt-impl', version: '0.10.6'
+    runtime group: 'io.jsonwebtoken', name: 'jjwt-jackson', version: '0.10.6'
+    compile group: 'javax.validation', name: 'validation-api', version: '2.0.1.Final'
+    compile group: 'org.hibernate', name: 'hibernate-validator', version: '5.1.3.Final'
+    compile group: 'org.hibernate', name: 'hibernate-validator-annotation-processor', version: '5.0.0.Alpha1'
+    compile group: 'javax.el', name: 'javax.el-api', version: '3.0.0'
+    compile group: 'org.springframework', name: 'spring-context-support', version: '5.1.8.RELEASE'
+    compile group: 'javax.mail', name: 'mail', version: '1.4.7'
+    compile 'org.slf4j:jcl-over-slf4j:1.7.12'
+    compile 'ch.qos.logback:logback-classic:1.1.3'
+    compile group: 'com.google.guava', name: 'guava', version: '28.0-jre'
+    compile group: 'org.hibernate', name: 'hibernate-search-orm', version: '5.11.2.Final'
+    compile group: 'org.modelmapper', name: 'modelmapper', version: '2.3.5'
+    testCompile group: 'org.springframework', name: 'spring-test', version: '5.1.8.RELEASE'
+    compile group: 'commons-fileupload', name: 'commons-fileupload', version: '1.3.1'
+    compile group: 'commons-io', name: 'commons-io', version: '2.4'
+    testCompile group: 'org.mockito', name: 'mockito-core', version: '2.23.4'
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    compile group: 'org.springframework.security', name: 'spring-security-oauth2-client', version: '5.1.5.RELEASE'
+    compile group: 'org.springframework.security', name: 'spring-security-oauth2-jose', version: '5.1.5.RELEASE'
+    compile group: 'org.springframework.data', name: 'spring-data-mongodb', version: '2.1.1.RELEASE'
+    implementation 'eu.codearte.catch-exception:catch-exception:2.0'
+    implementation 'org.assertj:assertj-core:3.13.2'
+    compile group: 'org.apache.tika', name: 'tika-core', version: '1.22'
+    compile group: 'io.springfox', name: 'springfox-swagger2', version: '2.9.2'
+    compile group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.9.2'
+    compile group: 'io.springfox', name: 'springfox-bean-validators', version: '2.9.2'
+    compileOnly 'org.projectlombok:lombok:1.18.8'
+    annotationProcessor 'org.projectlombok:lombok:1.18.8'
+
+    //liquibase
+    liquibaseRuntime 'org.liquibase:liquibase-core:3.6.1'
+    liquibaseRuntime 'org.liquibase:liquibase-groovy-dsl:2.0.0'
+    liquibaseRuntime 'org.postgresql:postgresql:42.2.4'
+    liquibaseRuntime sourceSets.main.output
+}
+
+
+
+liquibase {
+    activities {
+        main {
+
+            changeLogFile 'src/main/resources/db/schema.xml'
+            url 'jdbc:postgresql://localhost:5433/workhub4'
+            username 'postgres'
+            password 'admin'
+        }
+
+
+
+    }}

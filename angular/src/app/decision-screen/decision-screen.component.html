@@ -1,0 +1,120 @@
+<div class="ui top inverted dark fixed menu">
+    <a style="margin-right: 2%; margin-left:1%; color:white; margin-top:1%; margin-bottom: 1%;
+    margin-left: 1%; font-family: 'Source Code Pro', monospace; font-size: 20px;" routerLink="/home"><b>WorkHub</b></a>
+    <div class="right menu">
+        <app-profile-view style="margin: 10px 15px 8px 10px"></app-profile-view>
+    </div>
+</div>
+
+<div style="margin-left: auto; margin-right: auto; width: 850px; margin-top: 5%;">
+
+    <div class="ui steps">
+        <div class="step">
+            <i class="unlock alternate icon"></i>
+            <div class="content">
+                <div class="title">Registration</div>
+                <div class="description">Create account in our system</div>
+            </div>
+        </div>
+        <div class="step">
+            <i class="address card icon"></i>
+            <div class="content">
+                <div class="title">Profile filling</div>
+                <div class="description">Provide your personal information</div>
+            </div>
+        </div>
+        <div class="active step">
+            <i class="briefcase icon"></i>
+            <div class="content">
+                <div class="title">Join or create company</div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div style="text-align:center" *ngIf="message">
+
+    <div *ngIf="message" class="message mx-auto" style="margin-left: 40%; top: 200px; position : absolute;">
+
+        <div class="ui negative message">
+            <div class="header">
+                {{message}}
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<div class="ui two column grid decision-containers">
+    <div class="column">
+        <div class="ui center aligned container">
+            <h2 class="ui header decision-header">Join company</h2>
+            <div style="margin: 0 auto;">
+                <div class="ui grid" style="margin-left: 50px;margin-right: 50px">
+                    <div class="four column centered row companies-grid">
+                        <div class="seven wide centered column" style="border: 1px solid #aaa;">
+                            <div class="row">
+                                <div class="ui text container companie-select-text">
+                                    Choose your company:
+                                    <sui-select class="selection" [(ngModel)]="selectedOption" labelField="name"
+                                        [isSearchable]="true" [options]="companies" (ngModelChange)="selectedOptionChange($event)"
+                                        #select [placeholder]="Select" style="height: 40%;width: 100%;">
+                                        <sui-select-option *ngFor="let company of companies" [value]="company">
+                                        </sui-select-option>
+                                    </sui-select>
+                                </div>
+                            </div>
+                            <div style="margin: 3%; text-align:center;">
+                                <button (click)="apply()" [disabled]="!company" class="ui primary button">JOIN</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="column">
+        <div class="ui center aligned container">
+            <h2 class="ui header decision-header">Create your company</h2>
+            <div style="margin: 0 auto;">
+                <div class="ui grid" style="margin-left: 50px;margin-right: 50px">
+                    <div class="four column centered row companies-grid">
+                        <div class="seven wide column" style="border: 1px solid #aaa;">
+                            <div class="ui justified container right floated">
+                                <div class="row">
+                                    <div class="ui text container companie-select-text">
+                                        If you want to hire other companies for your projects
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="margin: 3%; text-align:center;">
+                                <button (click)="setCompanyTypeEmployer()" class="ui primary button">EMPLOYER</button>
+                            </div>
+                        </div>
+                        <div class="two wide column">
+                        </div>
+                        <div class="seven wide column" style="border: 1px solid #aaa;">
+                            <div class="ui justified container ">
+                                <div class="row">
+                                    <div class="ui text container companie-select-text">
+                                        If you want to implement some companies projects
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="margin: 3%; text-align:center;">
+                                <button (click)="setCompanyTypeEmployee()" class="ui primary button">EMPLOYEE</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<div class="ui vertical divider" style="height: 150px; margin-top: 2%; margin-left: -2%;">
+    Or
+</div>

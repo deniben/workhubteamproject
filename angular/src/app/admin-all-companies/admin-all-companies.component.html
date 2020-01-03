@@ -1,0 +1,95 @@
+<!-- <!doctype html>
+
+<html class="no-js" lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css">
+</head>
+<body> -->
+  <app-header></app-header>
+
+<div class="off-canvas-wrapper">
+  <div class="off-canvas-wrapper-inner" data-off-canvas-wrapper>
+    <div class="ui left fixed large vertical menu" style="z-index:1;width: 15%; margin-top: 1%">
+      <a class="active item" style="margin-top: 25%;"><i class="users icon"></i> All Companies</a>
+      <a class=" item" style="margin-top: 6%;" routerLink="/admin/blockedCompanies"><i class="ban icon"></i> Blocked
+        Companies</a>
+    </div>
+
+
+    <div class=" ui special cards" style="margin-left: 15%; margin-top: 6%">
+
+      <div class="card" style=" width: 350px; margin-top: 2%"*ngFor="let comp of companies  | paginate: { itemsPerPage: pagesCount, currentPage: pageNumber, totalItems: pagesCount * pagesCount }; let i = index">
+        <div class="alignment">
+          <div class="image-header">
+            <img style="width: 175px; height: 108.6px;" [src]="comp.photoUrl">
+          </div>
+
+          <p style="font-size: 20px; "><b>{{comp.name}}</b></p>
+          <div class="description">{{comp.description.slice(1,35)}}...</div>
+
+          <p style="font-size: 14px"><b>type: {{comp.type}}</b></p>
+          <button class="ui button" style="width: 150px" (click)="open(comp.id)">
+            <i class="icon edit"></i>
+            Edit
+          </button>
+
+          <form [formGroup]="updateCompForm" (ngSubmit)="updateComp(updateCompForm.value, comp.id)">
+            <ng-template let-context let-modal="modal" #modalTemplate>
+
+              <div class="header">Edit company</div>
+              <div class="content">company name
+                <br>
+                <div class="ui active input">
+                  <input type="text" formControlName="companyName" value="{{companyById.name}}">
+                </div>
+                <br>
+                description
+                <br>
+                <div class="ui active input">
+                  <input type="text" formControlName="companyDescription" value="{{companyById.description}}">
+                </div>
+                <div class="field" style="margin-top: 5%;" *ngIf="skills">
+                  <label>Skills</label>
+                  <div class="ui segment">
+                    <app-skills-multiselect></app-skills-multiselect>
+                  </div>
+                </div>
+              </div>
+              <br><br>
+              <div class="actions">
+                <button class="ui red button" (click)="modal.deny('denied')">Cancel</button>
+                <button class="ui green button"  type="submit" (click)="updateComp(updateCompForm.value,comp.id); modal.deny()">
+                  EDIT
+                </button>
+              </div>
+            </ng-template>
+
+          </form>
+
+          <br>
+          <div>
+            <button class="ui red button" style="width: 80px" (click)="blockCompany(comp.id,i)">Block</button>
+            <button *ngIf=" comp.type === 'EMPLOYER'" class="ui  button" style="width: 100px"
+              (click)="more(comp.id)">Projects</button>
+          </div>
+        </div>
+      </div>
+
+
+  </div>
+  </div>
+  <hr>
+  <div  style="margin-left: 46%; margin-bottom:0.5%; margin-top: 1%;">
+    <pagination-controls (pageChange)="change_page($event)"></pagination-controls>
+  </div>
+
+</div>
+<!-- <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script src="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.js"></script>
+<script>
+    $(document).foundation();
+</script>
+</body>
+</html> -->

@@ -1,0 +1,62 @@
+<app-header></app-header>
+
+<div class="ui top attached tabular menu" style='margin-top: 120px;'>
+  <a class="active item">
+    Manage
+  </a>
+  <a class="item" routerLink='/admin/users/create'>
+    Create
+  </a>
+  <div class="right menu">
+    <div class="item">
+      <div class="ui transparent icon input">
+        <input type="text" (keyup)="filter($event)" #filter_field placeholder="Search users...">
+        <i class="search link icon"></i>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="ui bottom attached segment">
+
+
+  <table class="ui very basic collapsing celled table" style="width: 100%;">
+    <thead>
+      <tr><th>Profile</th>
+      <th>Role</th>
+      <th></th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let user of users | paginate: { itemsPerPage: page_size, currentPage: current_page, totalItems: pages_count * page_size }">
+          <td>
+            <h4 class="ui image header" style="margin-left: 2%;">
+              <img *ngIf="user.photoUrl" [src]="user.photoUrl" class="ui mini rounded image">
+              <div class="content">
+                {{user.firstName}} {{user.lastName}}
+                <div class="sub header">{{user.username}}
+              </div>
+            </div>
+          </h4></td>
+          <td>
+            <mat-form-field>
+              <mat-select (selectionChange)="change_role(user.userId, user.role)" [(value)]="user.role">
+                <mat-option *ngFor="let role of roles" [value]="role">
+                  {{role}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </td>
+          <td>
+             <p *ngIf="!user.id">Not active yet</p>
+             <button class="ui inverted red button" style='width: 120px;' [ngClass]="{ 'disabled' : user.role === 'ADMIN' }" (click)='block(user)' *ngIf="!user.blocked && user.id">Block</button>
+             <button class="ui inverted green button" style='width: 120px;' (click)='unblock(user)' *ngIf="user.blocked && user.id">Unblock</button>
+          </td>
+       </tr>
+    </tbody>
+  </table>
+
+<div *ngIf="pages_count > 1" style="margin-left: 46%; margin-bottom:0.5%; margin-top: 4%;">
+  <pagination-controls (pageChange)="change_page($event)"></pagination-controls>
+</div>
+
+</div>

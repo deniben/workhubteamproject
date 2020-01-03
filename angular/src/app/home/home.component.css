@@ -1,0 +1,167 @@
+img.header {
+    max-width:100%;
+    height: 400px;
+}
+
+img.company {
+    max-width:100px;
+    height: 60px;
+}
+img.offering {
+  max-width:550px;
+  height: 250px;
+}
+img.button_readmore
+{
+    align-items: center;
+    max-width:150px;
+    height: 70px;
+}
+img.companyType
+{
+    max-width:500px;
+    height: 100px;
+}
+img.hotprojectheaader
+{
+    max-width:500px;
+    height: 150px;
+
+}
+img.whatweoffer
+{
+    max-width:650px;
+    height: 100px;
+}
+img.logo
+{
+    max-width:800px;
+    height: 120px;
+}
+img.logo2
+{
+    max-width:700px;
+    height: 60px;
+}
+img.logo3
+{
+    max-width:850px;
+    height: 100px;
+}
+img.pointer
+{
+    max-width:80px;
+    height: 50px;
+}
+img.companyicon
+{
+    max-width:100px;
+    height: 60px;
+}
+img.employer
+{
+    max-width:170px;
+    height: 170px;
+}
+img.employee
+{
+    max-width:150px;
+    height: 150px;
+}
+
+img.step
+{
+    max-width:50px;
+    height: 50px;
+}
+
+.container {
+    position: relative;
+    width: 100%;
+  }
+  
+
+  .container img {
+    width: 100%;
+    height: 400px;
+  }
+
+  .container .btn {
+    position: absolute;
+    top: 55%;
+    left: 14%;
+    transform: translate(-10%, -50%);
+    -ms-transform: translate(-10%, -50%);
+    background-color: #555;
+    font-family: 'Comfortaa', cursive;
+    font-size: 22px;
+    font-weight: 400;
+    margin-bottom: 16px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #e8ecec;
+    padding: 12px 24px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+
+  .container .btn:hover {
+    background-color: black;
+  }
+
+  .container .btn1 {
+    position: absolute;
+    top: 55%;
+    left: 30%;
+    transform: translate(-10%, -50%);
+    -ms-transform: translate(-10%, -50%);
+    background-color: #555;
+
+    font-family: 'Comfortaa', cursive;
+    font-size: 22px;
+    font-weight: 400;
+    margin-bottom: 16px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #e8ecec;
+    padding: 12px 24px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+
+  .container .btn1:hover {
+    background-color: black;
+  }
+
+
+  section.top-bar-section {
+    float: left;
+    left: 50% !important;
+    position: relative;
+}
+section.top-bar-section ul.left {
+    position: relative;
+    right: 50%;
+}
+
+.box > div > img  {
+   
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+
+}
+
+.box > div  {
+   
+    width: 100%;
+    height: 100%;
+   
+
+}
+.row {
+    max-width: 95%;
+    
+}

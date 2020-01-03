@@ -1,0 +1,173 @@
+<!doctype html>
+<html class="no-js" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>WorkHub</title>
+    <base href="/" />
+
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.0-beta.5/angular.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+</head>
+
+<body>
+
+
+
+    <div class="ui top inverted dark fixed menu" style="position: fixed;">
+        <a style="margin-right: 2%; display:flex; margin-left:4%; color:white; margin-top:1.3%; margin-bottom: 1%; margin-left: 1%; font-family: 'Source Code Pro', monospace; font-size: 20px;">
+            <b>WorkHub</b>
+        </a>
+        <div class="ui inverted secondary menu">
+            <a class="item" routerLink="/employer">Home</a>
+            <a class="item" routerLink="/employer/my-projects">My Company</a>
+        </div>
+        <div class="right menu">
+            <app-profile-view style="margin: 8px 8px 8px 8px"></app-profile-view>
+        </div>
+    </div>
+
+
+
+    <div class="ui left fixed vertical menu" style="margin-top:3%; background-color: #f9fafb;
+        width: 13%;
+        margin-top: 4%">
+        <div class="column" style="margin-top: 10%;align-content: center;">
+            <a class="item" routerLink="/employer/my-company"><i class="home icon"></i><b>View company</b></a>
+            <a class="active item" routerLink="/employer/my-projects"><i class="briefcase icon"></i><b>My projects</b></a>
+            <hr />
+        </div>
+
+        <br /><br />
+    </div>
+
+
+
+
+    <form [formGroup]="projectForm" (ngSubmit)="createOrEditProject(projectForm.value)" class="ui form" style="margin-left: 2%; width: 50%;">
+        <h4 style="font-size: 30px; font-style:normal; text-align: center; margin-top: 10%" id="projectTitle">{{header}}</h4>
+
+        <div style="margin: 0; ">
+            <div style="margin-top: 20px;">
+
+                <div *ngIf="showErrors">
+                    <p class="err-msg">{{errorMsg}}</p>
+                </div>
+                <div class="field" style="margin-top: 1%;">
+                    <label style="text-align: left">Name</label>
+                    <input type="text" style="font-size: 13px;" name="name" class="question" id="nme" formControlName="projectName" placeholder="Your project name" [ngClass]="{'is-invalid' : submitted && projectForm.controls.projectName.errors}" />
+                    <label for="nme"><span>Name </span></label>
+                    <div *ngIf="projectForm.controls.projectName.invalid &&(projectForm.controls.projectName.dirty || projectForm.controls.projectName.touched)">
+                        <div *ngIf="projectForm.controls.projectName.errors?.required">
+                            <p class="err-msg">
+                                Name can not be empty
+                            </p>
+                        </div>
+                        <div *ngIf="projectForm.controls.projectName.errors?.minlength">
+                            <p class="err-msg">
+                                Name must not be shorter than 5 characters
+                            </p>
+                        </div>
+                        <div *ngIf="projectForm.controls.projectName.errors?.maxlength">
+                            <p class="err-msg">
+                                Name must not be longer than 30 characters
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="field" style="margin-top: 1%;">
+                    <label style="text-align: left">Description</label>
+                    <textarea name="message" rows="4" style="font-size: 13px;" class="question" id="msg" formControlName="projectDescription" placeholder="Your  project description" required autocomplete="off"></textarea>
+                    <label for="msg"><span>What's your message?</span></label>
+                    <div *ngIf="projectForm.controls.projectDescription.invalid &&(projectForm.controls.projectDescription.dirty || projectForm.controls.projectDescription.touched)">
+
+                        <div *ngIf="projectForm.controls.projectDescription.errors?.required">
+                            <p class="err-msg">
+                                Description can not be empty
+                            </p>
+                        </div>
+                        <div *ngIf="projectForm.controls.projectDescription.errors?.minlength">
+                            <p class="err-msg">
+                                Description must not be shorter than 10 characters
+                            </p>
+                        </div>
+                        <div *ngIf="projectForm.controls.projectDescription.errors?.maxlength">
+                            <p class="err-msg">
+                                Description must not be longer than 1000 characters
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="field" style="margin-top: 1%;">
+                    <label style="text-align: left">Date</label>
+
+                    <div>
+                        <input type="date" style="font-size: 13px;" formControlName="expiryDate" [(ngModel)]="dateInForm" class="question" class="form-control" placeholder="expiryDate" required autocomplete="off" />
+                    </div>
+                    <div *ngIf="projectForm.controls.expiryDate.invalid &&(projectForm.controls.expiryDate.dirty || projectForm.controls.expiryDate.touched)">
+                        <div *ngIf="projectForm.controls.expiryDate.errors?.minDate">
+                            <p class="err-msg">
+                                expiryDate is invalid
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="field" style="margin-top: 1%;"></div>
+                    <label style="text-align: left;">Budget</label>
+                    <input type="number" style="font-size: 13px;" formControlName="budget" maxlength="16" class="question" placeholder="Budget" required autocomplete="off">
+                    <label for="msg"><span>What's your message?</span></label>
+                </div>
+                <div *ngIf="projectForm.controls.budget.invalid &&(projectForm.controls.budget.dirty || projectForm.controls.budget.touched)">
+                    <div *ngIf="projectForm.controls.budget.errors?.min">
+                        <p class="err-msg">
+                            Budget must not be negative
+                        </p>
+                    </div>
+                    <div *ngIf="projectForm.controls.budget.errors?.max">
+                        <p class="err-msg">
+                            Budget must not be more than 1 000 000
+                        </p>
+                    </div>
+                </div>
+
+                <div class="field" style="margin-top: 1%;">
+                    <label style="text-align: left">Skills</label>
+                    <app-skills-multiselect></app-skills-multiselect>
+                </div>
+
+
+                <div class="field" style="margin-top: 1%;">
+                    <label style="text-align: left">Project Type</label>
+                    <app-pt-multiselect></app-pt-multiselect>
+                </div>
+
+
+                <div class="field" style="margin-top: 1%;">
+                    <app-fileload [parent]="projectForm" [photoHeight]="2" [photoWidth]="3"></app-fileload>
+                </div>
+
+
+                <div class="field" style="margin-top: 1%;">
+                    <button [disabled]="projectForm.controls.projectName.invalid || projectForm.controls.projectDescription.invalid
+                 || projectForm.controls.expiryDate.invalid || projectForm.controls.budget.invalid || projectForm.controls.budget.invalid" type="submit" class="ui primary button">{{submit}}</button>
+                    <a routerLink="/back" class="ui button">Cancel</a>
+                </div>
+            </div>
+        </div>
+    </form>
+
+
+
+
+
+</body>
+
+</html>

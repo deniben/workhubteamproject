@@ -1,0 +1,39 @@
+  <app-header></app-header>
+
+<div class="off-canvas-wrapper"  >
+  <div class="off-canvas-wrapper-inner" data-off-canvas-wrapper  >
+    <div class="ui left fixed large vertical menu" style="z-index:1;width: 15%;margin-top: 4.6%">
+      <a class=" item" style="margin-top: 1%;" routerLink="/admin/allCompanies" ><i class="users icon"></i> All Companies</a>
+      <a class="active item" style="margin-top: 5%;"><i class="ban icon"></i> Blocked Companies</a>
+    </div>
+
+
+      <div class=" ui special cards" style="margin-left: 15%;  margin-top: 6%"   >
+
+        <div class="card" style=" width: 350px; margin-top: 2%"*ngFor="let comp of companies  | paginate: { itemsPerPage: pagesCount, currentPage: pageNumber, totalItems: pagesCount * pagesCount }; let i = index">
+
+        <div class="alignment">
+            <div class="image-header">
+          <img style="width: 175px; height: 108.6px;" [src]="comp.photoUrl">    </div>   <p style="font-size: 20px; "><b>{{comp.name}}</b></p>
+          <div class="description">{{comp.description.slice(1,35)}}...</div>
+
+          <p style="font-size: 14px"><b>type: {{comp.type}}</b></p>
+
+
+          <button class="ui green button" style="width: 100px" (click)="unblockCompany(comp.id,i); ">Unblock</button>        </div>
+      </div>
+      </div> </div>
+      <hr>
+  <div  style="margin-left: 46%; margin-bottom:0.5%; margin-top: 1%;">
+    <pagination-controls (pageChange)="change_page($event)"></pagination-controls>
+  </div>
+    </div>
+
+
+<!-- <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script src="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.js"></script>
+<script>
+    $(document).foundation();
+</script>
+</body>
+</html> -->

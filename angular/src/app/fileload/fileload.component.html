@@ -1,0 +1,22 @@
+<label>Photo</label>
+<div [formGroup]="parent">
+  <input
+    type="file"
+    formControlName="photoUrl"
+    accept="image/*"
+    (change)="preview($event)"
+  />
+</div>
+<p class="err-msg">
+  {{ messageAboutType }}
+</p>
+<p class="err-msg">
+  {{ messageAboutSize }}
+</p>
+<img [src]="imgURL" height="200" *ngIf="imgURL" />
+<image-cropper
+  [imageChangedEvent]="imageChangedEvent"
+  format="png"
+  (imageCropped)="imageCropped($event)"
+  [aspectRatio]="photoWidth / photoHeight"
+></image-cropper>

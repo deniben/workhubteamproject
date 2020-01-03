@@ -1,0 +1,14 @@
+.thumbnail{
+  width: 1200px;
+}
+
+.alignment {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.image-header img{
+  object-fit: cover;
+}

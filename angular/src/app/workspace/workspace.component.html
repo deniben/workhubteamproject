@@ -1,0 +1,103 @@
+<kendo-scheduler [kendoSchedulerBinding]="events"
+                     [selectedDate]="selectedDate"
+                     (remove)="remove_event($event)"
+                     (slotClick)='add_event($event)'
+                     (cancel)='close_dialog($event)'
+                     (save)='save_event($event)'
+                     (eventClick)='show_details($event)'
+                     (dateChange)='date_changed($event)'
+                     scrollTime="08:00"
+                     [min]="min_date"
+                     [max]="max_date"
+                     editable=true
+                     style="height: 600px; margin-left: 320px; margin-top: 120px; width: 40%;">
+    <kendo-scheduler-day-view>
+    </kendo-scheduler-day-view>
+
+    <kendo-scheduler-week-view>
+    </kendo-scheduler-week-view>
+
+    <kendo-scheduler-month-view>
+    </kendo-scheduler-month-view>
+
+</kendo-scheduler>
+
+<h3 class="header" *ngIf="event_details" style='margin-left: 320px;'>Current event:</h3>
+<div class="ui red card" *ngIf="event_details" style='margin-left: 530px;'>
+  <div class="content">
+    <a class="header">{{event_details.title}}</a>
+    <div class="meta">
+      <span class="date">by {{event_details.ownerName}}</span>
+    </div>
+    <div class="description">
+      {{event_details.description}}.
+    </div>
+  </div>
+</div>
+
+<div class="ui positive message" style='width: 30%; margin-left: 320px;' *ngIf="event_message">
+  <i class="close icon" (click)='event_clear_messages()'></i>
+  <div class="header">
+    {{event_message}}
+  </div>
+</div>
+
+<div class="ui negative message" style='width: 30%; margin-left: 320px;' *ngIf="event_err_message">
+  <i class="close icon" (click)='event_clear_messages()'></i>
+  <div class="header">
+    {{event_err_message}}
+  </div>
+</div>
+
+<div style='text-align: center; width: 30%; margin-left: 60%; margin-top: -60px; position: absolute;' class="ui negative message" *ngIf="err_message">
+    <div class="header">
+      {{err_message}}
+    </div>
+</div>
+
+<div style='text-align: center; width: 30%; margin-left: 60%; margin-top: -60px; position: absolute;' class="ui success message" *ngIf="message">
+    <div class="header">
+      {{message}}
+    </div>
+</div>
+
+<div style='width: 30%; margin-left: 60%; position: absolute; top: 120px;'>
+  <table class="ui celled striped table">
+    <thead>
+      <tr><th colspan="4">
+        Documents
+      </th>
+    </tr></thead>
+    <tbody>
+      <tr *ngFor="let file of files | paginate: { itemsPerPage: page_size, currentPage: page_number, totalItems: pages_count * page_size }">
+        <td>
+          <i class="file icon"></i> {{name_preprocess(file.name)}}
+        </td>
+        <td>
+          <button class="ui primary button" (click)="download(file.name)">
+            Download
+          </button>
+        </td>
+        <td class="right aligned">{{file.date.dayOfMonth}}/{{file.date.monthValue}}/{{file.date.year}}</td>
+        <td class="right aligned" *ngIf="!file.owner">{{file.companyOwner.name}}</td>
+        <td class="right aligned" *ngIf="file.owner">
+          <button class="ui icon button" (click)='delete(file.name)'>
+            <i class="trash icon"></i>
+          </button>
+        </td>
+      </tr>
+   
+      <div style='width: 135px; margin: 5px; margin-left: 5%; margin-top: 20px;'>
+          <label for="files" class="ui button">Choose file</label>
+          <input id="files" style="visibility:hidden;" type="file" (change)='load_document($event)'>
+        </div>
+         <!-- <label (change)='load_document($event)' type="file" class="ui button" for="customFileLang" style='width: 135px; margin: 5px; margin-left: 38%; margin-top: 20px;'>Choose file</label> --> 
+     
+   
+    </tbody>
+  </table>
+
+  <div style='margin-left: 28%'>
+    <pagination-controls (pageChange)="change_page_docs($event)" style='width: 300px;'></pagination-controls>
+  </div>
+</div>

@@ -1,0 +1,9 @@
+@import "~jqwidgets-scripts/jqwidgets/styles/jqx.base.css";
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+@import '~ngx-toastr/toastr';
+html *
+{
+  font-size: 1rem;
+  font-family: 'Heebo', sans-serif;
+
+}

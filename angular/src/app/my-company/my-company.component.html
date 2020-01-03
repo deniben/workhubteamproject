@@ -1,0 +1,25 @@
+<div class="pusher">
+    <div class="ui vertical stripe segment">
+        <div class="ui middle aligned stackable grid container">
+            <div class="row">
+                <div class="six wide left floated column">
+                    <img src={{company.photoUrl}} class="ui large bordered rounded image">
+                </div>
+                <div class="eight wide column">
+                    <h3 class="ui header">{{company.name}}</h3>
+                    <p [innerHTML]="company.description"></p>
+                    <div class="ui grid skills-grid">
+                        <div class="column skills-column" *ngFor="let skill of company.skills"><a>{{skill.name}}</a></div>
+                    </div>
+                </div>
+            </div>
+            <div class="row"></div>
+            <div class="row"></div>
+            <div class="row" *ngIf="isOwner">
+                <div class="center aligned column">
+                    <a class="ui gold huge button" (click)="goToEditPage()">Edit Company</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

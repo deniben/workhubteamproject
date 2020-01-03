@@ -1,0 +1,80 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Foundation | Welcome</title>
+</head>
+<body>
+<div class="ui top inverted dark fixed menu" style="position: fixed;">
+  <a
+    style="margin-right: 2%; display:flex; margin-left:4%; color:white; margin-top:1.3%; margin-bottom: 1%; margin-left: 1%; font-family: 'Source Code Pro', monospace; font-size: 20px;"
+  ><b>WorkHub</b></a
+  >
+  <a href="/decision" class="active item">
+    Home
+  </a>
+  <div class="right menu">
+    <app-profile-view style="margin: 10px 15px 8px 10px"></app-profile-view>
+  </div>
+</div>
+
+
+<form [formGroup]="companyForm" class="ui form" (ngSubmit)="createOrEditCompany(companyForm.value)"
+      style="margin-left: 20%; left: 25px; width: 50%;">
+  <h4 style="font-size: 30px; font-style:normal; text-align: center; margin-top: 10%" id="companyTitle">{{header}}</h4>
+  <div style="margin: 0 auto;">
+    <div style="margin-top: 10px;">
+      <div *ngIf="showErrors">
+        <p class="err-msg">{{errorMsg}}</p>
+      </div>
+      <div class="field">
+        <label>Name</label>
+        <input type="text" formControlName="companyName" class="form-control" placeholder="Your company name"/>
+        <div
+          *ngIf="companyForm.controls.companyName.invalid &&(companyForm.controls.companyName.dirty || companyForm.controls.companyName.touched)">
+          <div *ngIf="companyForm.controls.companyName.errors.required">
+            <p class="err-msg">Name is required</p>
+          </div>
+          <div
+            *ngIf="companyForm.controls.companyName.errors?.minlength || companyForm.controls.companyName.errors?.maxlength">
+            <p class="err-msg">Name shound have min=3 symbols and max=30</p>
+          </div>
+        </div>
+      </div>
+      <div class="field" style="margin-top: 2%;">
+        <label>Description</label>
+        <textarea rows="4" cols="50" formControlName="companyDescription" class="form-control"
+                  [ngClass]="{ 'is-invalid': submitted && companyForm.controls.companyDescription.errors}"
+                  placeholder="Your company name"></textarea>
+        <div
+          *ngIf="companyForm.controls.companyDescription.invalid &&(companyForm.controls.companyDescription.dirty || companyForm.controls.companyDescription.touched)">
+          <div *ngIf="companyForm.controls.companyDescription.errors.required">
+            <p class="err-msg">Description is required</p>
+          </div>
+          <div
+            *ngIf="companyForm.controls.companyDescription.errors?.maxlength || companyForm.controls.companyDescription.errors?.minlength">
+            <p class="err-msg">Description shound have min=25 symbols and max=2000</p>
+          </div>
+        </div>
+      </div>
+      <div class="field" style="margin-top: 2%;" *ngIf="showSkills">
+        <label>Skills</label>
+        <app-skills-multiselect></app-skills-multiselect>
+      </div>
+      <div class="field">
+        <app-fileload [parent]="companyForm" [photoHeight]="2" [photoWidth]="3"></app-fileload>
+        <div *ngIf="companyForm.controls.photoUrl.errors?.required">
+        </div>
+      </div>
+      <div class="field" style="margin-top: 2%;">
+        <button
+          [disabled]="companyForm.controls.companyDescription.invalid || companyForm.controls.companyName.invalid || companyForm.controls.photoUrl.invalid"
+          type="submit" class="ui primary button">{{submit}}</button>
+        <a routerLink="/{{back}}" class="ui button">Cancel</a>
+      </div>
+    </div>
+  </div>
+</form>
+</body>
+</html>

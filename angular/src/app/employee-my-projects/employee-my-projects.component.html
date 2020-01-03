@@ -1,0 +1,62 @@
+<div>
+  <div class="ui top inverted dark fixed menu" style="position: fixed;">
+    <a style="margin-right: 2%; display:flex; margin-left:4%; color:white; margin-top:1.3%; margin-bottom: 1%; margin-left: 1%; font-family: 'Source Code Pro', monospace; font-size: 20px;"><b>WorkHub</b></a>
+    <a class="active item " routerLink='/employee'>Home</a>
+    <a class="item" routerLink="/employee/my-company">
+        My Company
+    </a>
+    <div class="right menu">
+        <app-profile-view style="margin: 10px 15px 8px 10px"></app-profile-view>
+    </div>
+</div>
+
+<div class="ui left fixed large vertical menu" style="z-index:1; background-image: url(https://happywall-img-gallery.imgix.net/315/dimmig_skog_svartvit_display.jpg);">
+    <a class="item" routerLink='/employee' style="margin-top: 70px;"><i class="home icon"></i> Home</a>
+    <a class="active item" routerLink='/employee/my-projects'><i class="briefcase icon"></i>My Projects
+        <app-new-projects-notifications></app-new-projects-notifications></a>
+    <a class="item" routerLink='/employee/requests'><i class="comments icon"></i>Requests</a>
+    <a class="item" routerLink='/employee/company/requests'><i class="users icon"></i>Membership requests</a>
+</div>
+  <div class="ui right fixed vertical menu" style="z-index:1;">
+    <div class="item" style="margin-top: 45%;">
+      <div class="header">My workspace</div>
+      <div class="menu">
+        <a class="item active">Current projects</a>
+      </div>
+    </div>
+    <div class="item">
+      <div class="header">History</div>
+      <div class="menu">
+        <a class="item" routerLink='/employee/my-projects/finished'>Finished projects</a>
+        <a class="item" routerLink='/employee/my-projects/finished/completed'>Completed projects</a>
+        <a class="item" routerLink='/employee/my-projects/finished/failed'>Failed projects</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<h3 class="header" *ngIf="!projects || projects.length === 0" style="margin-top: 10%; margin-left: 20%; margin-right: 20%;">You
+  haven't any active projects now</h3>
+
+<div class="ui cards" style="margin-top: 8%; margin-left: 20%; margin-right: 20%;">
+
+  <div class="ui card" *ngFor="let project of projects | paginate: { itemsPerPage: page_size, currentPage: page_number, totalItems: number_of_pages * page_size }">
+    <div class="content">
+      <a class="center aligned header" [routerLink]="'/employee/workspace/' + project.id">{{project.name}} <div class="ui tiny blue label"
+          *ngIf="project.new">New</div></a>
+      <div class="center aligned description">
+        <p>Budget: ${{project.budget}}</p>
+      </div>
+    </div>
+    <div class="extra content">
+      <div class="center aligned author">
+        with {{project.companyCreator.name}}
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div *ngIf="number_of_pages > 1" style="margin-left: 46%; margin-bottom:0.5%; margin-top: 4%;">
+  <pagination-controls (pageChange)="change_page($event)"></pagination-controls>
+</div>

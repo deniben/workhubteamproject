@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>WorkHub</title>
+    <base href="/" />
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+</head>
+
+<body>
+    <div class="ui top inverted dark fixed menu" style="position: fixed;">
+        <a style="margin-right: 2%; display:flex; margin-left:4%; color:white; margin-top:1.3%; margin-bottom: 1%; margin-left: 1%; font-family: 'Source Code Pro', monospace; font-size: 20px;" routerLink="/home"><b>WorkHub</b></a
+      >
+      <a class="item" routerLink="/employer">Home</a>
+        <a class="item" routerLink="/employer/my-company">My Company</a>
+        <div class="right menu">
+            <app-profile-view style="margin: 10px 15px 8px 10px"></app-profile-view>
+        </div>
+    </div>
+
+    <div class="ui left fixed vertical menu" style=" background-image: url(https://happywall-img-gallery.imgix.net/315/dimmig_skog_svartvit_display.jpg);
+              width: 13%;
+              margin-top: 4%;
+              ">
+        <div class="column" style="margin-top: 10%;align-content: center;">
+
+            <a class="item" routerLink="/employer/my-projects"><i class="briefcase icon"></i><b>My projects</b></a
+        >
+        <a class="item" routerLink="/create-project"
+          ><i class="check circle  icon"></i><b>Create project</b></a
+        >
+        <a *ngIf="project.projectStatus === 'NEW'" class="item" routerLink="/update-project/{{project.id}}"
+        ><i class="pencil alternate icon"></i><b>Edit project</b></a>
+            <div>
+                <a *ngIf="project.projectStatus === 'NEW'" class="item" data-toggle="modal" data-target="#myModalForDeleteProject"><i class="times circle icon"></i><b>Delete</b></a
+          >
+          <a *ngIf="project.projectStatus === 'IN_PROGRESS'"
+          class="item"
+          data-toggle="modal"
+          data-target="#myModalForRateProject"
+          (click)="status  = 'COMPLETED'"
+          ><i class="thumbs up icon"></i><b>Complete</b></a
+        >
+
+          <a *ngIf="project.projectStatus === 'IN_PROGRESS'"
+            class="item"
+            data-toggle="modal"
+            data-target="#myModalForRateProject"
+            (click)="status  = 'FAILED'"
+            ><i class="minus circle icon"></i><b>Fail</b></a
+          >
+
+          <hr />
+        </div>
+      </div>
+    </div>
+
+
+    <!------------------------------------------------------------------------------------------------------->
+    <div class="modal fade" id="myModalForRateProject">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+              <h1 class="modal-title">Rate</h1>
+              <button type="button" class="close" data-dismiss="modal">
+                &times;
+              </button>
+            </div>
+            <!-- Modal body -->
+            <div class="modal-body">
+              <p>
+                <b>Rate the work of the employee.</b>
+              </p>
+            </div>
+            <div class="container">
+              <div
+                class="starrating risingstar d-flex justify-content-center flex-row-reverse"
+              >
+                <input
+                  type="radio"
+                  id="star5"
+                  name="rating"
+                  value="5"
+                  (click)="rate = 5"
+                /><label for="star5" title="5 star"></label>
+                <input
+                  type="radio"
+                  id="star4"
+                  name="rating"
+                  value="4"
+                  (click)="rate = 4"
+                /><label for="star4" title="4 star"></label>
+                <input
+                  type="radio"
+                  id="star3"
+                  name="rating"
+                  value="3"
+                  (click)="rate = 3"
+                /><label for="star3" title="3 star"></label>
+                <input
+                  type="radio"
+                  id="star2"
+                  name="rating"
+                  value="2"
+                  (click)="rate = 2"
+                /><label for="star2" title="2 star"></label>
+                <input
+                  type="radio"
+                  id="star1"
+                  name="rating"
+                  value="1"
+                  (click)="rate = 1"
+                /><label for="star1" title="1 star"></label>
+              </div>
+            </div>
+            <!-- Modal footer -->
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-dismiss="modal">
+                Close
+              </button>
+
+              <button
+                type="button"
+                class="btn btn-success"
+                data-dismiss="modal"
+                (click)="completeProject(project.id, status)"
+              >
+                Finish
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    <!----------------------------------------------------------------------------------------------------->
+
+
+
+ <!---------------------------------------------------------------------------------------------------->
+ <div class="modal fade" id="myModalForDeleteProject">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Warning</h4>
+          <button type="button" class="close" data-dismiss="modal">
+            &times;
+          </button>
+        </div>
+        <!-- Modal body -->
+        <div class="modal-body">
+          Are you sure that you want to delete the project?
+        </div>
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">
+            Close
+          </button>
+
+          <button
+            type="button"
+            class="btn btn-success"
+            data-dismiss="modal"
+            (click)="finishProject(project.id)"
+            routerLink="/employer/my-projects"
+          >
+            Delete
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!---------------------------------------------------------------------------------------------------->
+
+
+
+  <div *ngIf="project.projectStatus == 'NEW'">
+
+      <div class="body" >
+        <h3 class="ui dividing header" style="margin-left: 20%;margin-top:5%" *ngIf="project.projectType">
+          {{ project.projectType.name }}
+        </h3>
+
+        <div class="ui grid" style="margin-left: 25%;margin-top: 3%">
+          <div class="six wide column">
+            <div class="ui big image" style="margin-top: 5%;" *ngIf="project.photo != null">
+              <img [src]="project.photo" style="width: 90%; height:90%;" />
+            </div>
+          </div>
+          <div
+            class="six wide column"
+            style="margin-top: 3%; margin-left: -3%;text-shadow: 0.5px 0.5px;"
+          >
+            <h2 class="header">{{ project.name }}</h2>
+            <h5 class="header" style="margin-top: 7%;">
+              <a style="color: #4183c4"> Description:</a> {{ project.description }}
+                </h5>
+                <h5 class="header">
+                    <a style="color: #4183c4">Budget:</a> ${{ project.budget }}
+                </h5>
+
+                <h5 class="header" *ngIf="project">
+                    <a style="color: #4183c4">Open till:</a> {{ project.expiryDate.dayOfMonth }} of {{ project.expiryDate.month }}, {{ project.expiryDate.year }}
+                </h5>
+
+                <div *ngIf="project">
+                    <h5 *ngIf="project.skillSet && project.skillSet.length > 0" class="header" style="margin-top : 5%;">
+                        <a style="color: #4183c4"><i>Required skills:</i></a>
+                        <a class="ui label" *ngFor="let skill of project.skillSet; let i = index">{{
+                  skill.name
+                }}
+
+              </a>
+                    </h5>
+                    <h5 *ngIf="project.skillSet && project.skillSet.length === 0" class="header" style="margin-top : 5%;">
+
+
+                        <a style="color: #4183c4">Required skills:</a> without skill requirements
+                    </h5>
+                </div>
+            </div>
+        </div>
+
+        <div style="margin-left: 26%;">
+            <div class="ui grid">
+                <div class="six wide column">
+                    <app-comments [project_id]="project.id" style="margin-top: 10%; margin-left: 5%; margin-bottom : 2%;"></app-comments>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="ui segment" style="background-color: rgb(238, 234, 234); font-family: 'Ubuntu', sans-serif; position: relative;">
+        <div style="margin-left: 15.9%;  ">
+            <h1><b>Invites to project</b></h1>
+        </div>
+
+        <div *ngIf="companysForMyProject.length > 0" class="ui four stackable cards" style="margin-top: 2.3%; margin-left: 200px;">
+            <div>
+                <table style="width: auto; margin-left: 25%; margin-top : 5%;">
+                    <tbody>
+                        <div>
+                            <tr>
+                                <td *ngFor="let company of companysForMyProject | paginate: { itemsPerPage: pagesCount, currentPage: pageNumber, totalItems: 4 }; let i = index">
+                                    <div class="ui cards" *ngIf="company" style="margin-left: 3%;">
+                                        <div class="card">
+                                            <div class="content">
+                                                <div class="header">
+                                                    {{ company.name }}
+                                                </div>
+
+                                                <div class="description">
+                                                    <h5 class="header" style="margin-top : 5%;">
+                                                        <a style="color: #4183c4">Company rate:</a>
+                                                        <i class="star icon" style="margin-left: 1%;color: black"></i>
+                                                        <i class="star icon" style="color: black" *ngFor="let i of company.rateArray"></i>
+                                                        <br />
+                                                    </h5>
+                                                    <a style="color: #4183c4" *ngIf="percents.length != 0">Your skills match for
+                              </a>
+                                                    <span> {{ percents[i] }}%</span>
+
+                                                    <a class="ui label" *ngFor="let skill of company.skillSet">{{
+                                skill.name
+                              }}</a>
+
+                                                </div>
+                                            </div>
+                                            <div class="extra content">
+                                                <div class="ui two buttons" *ngIf="project">
+                                                    <div class="ui inverted green button" data-toggle="modal" data-target="#myModalForAcceptCompany" (click)="setCompanyId(company.id, i)">
+                                                        Accept
+                                                    </div>
+
+                                                    <div class="ui inverted red button" data-toggle="modal" data-target="#myModalForRejectCompany" (click)="setCompanyId(company.id, i)">
+                                                        Reject
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <br />
+                                        </div>
+
+
+                                    </div>
+                                    <br />
+                                </td>
+                            </tr>
+                        </div>
+                    </tbody>
+                </table>
+
+
+                <br /><br />
+            </div>
+        </div>
+
+        <div *ngIf="pagesCount > 1" style="margin-left: 30%; margin-bottom:0.5%; margin-top: 4%;">
+            <pagination-controls (pageChange)="change_page($event)"></pagination-controls>
+        </div>
+
+        <div *ngIf="companysForMyProject == false" style="margin-left: 25%">
+            <h1 style="color: #4183c4">We have not any invites yet... Try later</h1>
+            <app-toastr></app-toastr>
+        </div>
+
+        <br /><br />
+    </div>
+
+    </div>
+
+    <div *ngIf="project.projectStatus == 'IN_PROGRESS'">
+
+        <app-workspace [project_id]="project.id"></app-workspace>
+        <app-comments [project_id]="project.id" style="margin-top: 4%; margin-left: 400px; margin-bottom : 2%; width: 40%; position: absolute"></app-comments>
+    </div>
+
+</body>
+
+<!------------------------------------------------------------------->
+<div class="modal fade" id="myModalForAcceptCompany">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title text-black" style="color: black">
+                    Warning
+                </h4>
+                <button type="button" class="close" data-dismiss="modal">
+              &times;
+            </button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <p style="color: black; height: initial">
+                    Are you sure that you want to accept this company?
+                </p>
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">
+              Close
+            </button>
+
+                <button type="button" class="btn btn-success" data-dismiss="modal" (click)="acceptCompanyToProject(companyId, project.id)" routerLink="/employer/my-projects">
+              Accept
+            </button>
+            </div>
+        </div>
+    </div>
+</div>
+<!------------------------------------------------------------------->
+<!------------------------------------------------------------------->
+<div class="modal fade" id="myModalForRejectCompany">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title text-black" style="color: black">
+                    Warning
+                </h4>
+                <button type="button" class="close" data-dismiss="modal">
+              &times;
+            </button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <p style="color: black; height: initial">
+                    Are you sure that you want to reject this company?
+                </p>
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">
+              Close
+            </button>
+
+                <button type="button" class="btn btn-success" data-dismiss="modal" (click)="rejectCompany(companyId, project.id)" (click)="rejectCompanyFromUI(i)">
+              Reject
+            </button>
+            </div>
+        </div>
+    </div>
+</div>
+<!------------------------------------------------------------------->
+
+</html>

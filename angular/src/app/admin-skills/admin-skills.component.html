@@ -1,0 +1,88 @@
+
+ <app-header></app-header>
+
+  <div class="ui top attached tabular menu" style='margin-top: 120px;'>
+      
+      <div class="left menu">
+          <div class="item">
+            <div class="ui transparent icon input">
+              <input style="margin-left:auto;margin-right:auto;display:block; font-size: 20px" type="text" (keyup)="filter($event)" #filter_field placeholder="Search skill...">
+              <i class="search link icon"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ui negative message" *ngIf="message" style="width: 50%; margin: 1rem auto; text-align: center;">
+        <div class="header">
+          {{message}}
+        </div>
+      </div>
+
+  <div class="ui bottom attached segment">
+ <div class="ui segments" style="width: 50%; margin: auto">
+                    <div class="ui segment">
+  
+                        <button class="ui basic button" style="margin-left:auto;margin-right:auto;display:block; font-size: 20px"(click)="collapse = !collapse">
+                            <i class="icon plus" ></i>
+                            Add skill
+                          </button>
+  
+                    </div>
+                    <div class="ui segment" >
+                        <div [suiCollapse]="!collapse">
+                            <div class="ui segment">
+                                <form [formGroup]="CreateSkillForm" (ngSubmit)="createSkill(CreateSkillForm.value)" class="ui form" style="margin-left: 2%; width: 98%;">
+                                    <input type="text"  style="width: 100%; margin: 10px; font-size: 16px; margin-left:auto; margin-right:auto;display:block" class="question" id="nme" formControlName="name" placeholder="skill name" />
+                                    <button type="submit" class="ui basic button" style="margin-left:auto;margin-right:auto;display:block">
+                                        <i class="icon check"></i>
+                                        Create
+                                      </button>
+      
+                                  </form>
+                                  
+                            </div>
+                        </div>
+                    </div>
+                </div>
+      <table class="ui selectable celled table" style="width: 60%; margin-left: 20%" >
+          <thead>         
+  
+            
+        
+          </thead>
+          <tbody>
+              <tr *ngFor="let skil of skill | paginate: { itemsPerPage: page_size, currentPage: current_page, totalItems: pages_count * page_size }">
+  
+              <td style='width: 50%'>{{skil.name}}</td>
+  
+              <td>
+                  <button class="ui button" style='width: 120px; margin-left:auto; margin-right:auto;display:block'  (click)="open(skil.id)" >Edit</button>
+               </td>
+                  <td>
+                      <button class="ui inverted red button" style='width: 120px; margin-left:auto; margin-right:auto;display:block'  (click)="deleteSkill(skil.id)" >Delete</button>
+              </td>
+             </tr>
+           
+          </tbody>
+          <div *ngIf="pages_count > 1">
+              <pagination-controls (pageChange)="change_page($event)"></pagination-controls>
+            </div>
+        </table>
+
+
+  <ng-template let-context let-modal="modal" #modalCreate>
+    <div class="header">Edit skill</div>
+    <div class="content">
+<form [formGroup]="updateSkillForm" (ngSubmit)="updateSkill(updateSkillForm.value, skill.id)" class="ui form" style="margin-left: 2%; width: 50%;">
+
+<label style="font-size: 15px; font-style: italic; text-align: left">Name</label>
+<input type="text"  value="{{skill.name}}" style="font-size: 13px;" class="question" id="nme" formControlName="name"  required autocomplete="off" />
+</form>
+    </div>
+    <div class="actions">
+        <button class="ui red button" (click)="modal.deny('denied')">Cancel</button>
+        <button class="ui green button" type="submit"(click)="updateSkill(updateSkillForm.value, skill.id); modal.deny('denied')">EDIT</button>
+
+      </div>
+</ng-template>

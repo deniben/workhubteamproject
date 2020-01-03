@@ -1,0 +1,52 @@
+
+ <app-header></app-header>
+
+<form [formGroup]="ipForm" (ngSubmit)="block_ip(ipForm.value)" class="ui action input" style="margin-top: 150px; margin-left: 35%; ">
+  <div class="field" >
+    <input type="text" placeholder="IP ADDRESS" formControlName="address" style="width: 250px;">
+    <p *ngIf="submitted && ipForm.controls.address.errors" style='color: red'>Wrong ip address</p>
+  </div>
+  <div class="field" >
+    <input type="text" placeholder="Reason" formControlName="reason" style="width: 250px;">
+    <p *ngIf="submitted && ipForm.controls.reason.errors" style='color: red'>Reason is required</p>
+  </div>
+  <div class="field">
+  <button type="submit" class="ui red button">Block</button>
+  </div>
+</form>
+
+<div class="ui success message" style="width: 30%; margin-left:35%;" *ngIf="message">
+  <i class="close icon" (click)="clearMsg()"></i>
+  <div class="header">
+    {{message}}
+  </div>
+</div>
+
+<div class="ui negative message" style="width: 30%; margin-left:35%;" *ngIf="error_message">
+  <i class="close icon" (click)="clearMsg()"></i>
+  <div class="header">
+    {{error_message}}
+  </div>
+</div>
+
+<table class="ui celled table" style="margin-top: 60px;">
+  <h4 *ngIf="!addresses || addresses.length === 0" style="margin-top: 20px; margin-left: 30%;">You haven't any blocked ip addresses yet</h4>
+  <thead>
+    <tr><th>Address</th>
+    <th>Reason</th>
+    <th>Date</th>
+    <th></th>
+  </tr></thead>
+  <tbody>
+    <tr *ngFor="let address of addresses | paginate: { itemsPerPage: page_size, currentPage: current_page, totalItems: pages_count * page_size }">
+      <td>{{address.address}}</td>
+      <td>{{address.reason}}</td>
+      <td>{{address.date.dayOfMonth}} {{address.date.month | titlecase}}, {{address.date.year}}</td>
+      <td><button class="positive ui button" (click)="unblock(address.id)">Unblock</button></td>
+    </tr>
+  </tbody>
+</table>
+
+<div *ngIf="pages_count > 1" style="margin-left: 35%; margin-bottom:0.5%; margin-top: 4%;">
+  <pagination-controls (pageChange)="change_page($event)"></pagination-controls>
+</div>

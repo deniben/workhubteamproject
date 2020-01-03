@@ -1,0 +1,15 @@
+<div *ngIf="photoUrl" class="ui right pointing dropdown" suiDropdown>
+  <img class="ui circular image" style="width: 50px; height: 50px;" [src]="photoUrl">
+  <div class="menu" style="min-width: 200px; text-align: center" suiDropdownMenu>
+    <img class="ui small circular image"
+         style="width: 100px; height: 100px; margin-top: 5%; margin-left: 24%; margin-right: 25%;" [src]="photoUrl">
+    <h1 class="header" style="font-size: 15px;">{{name}}</h1>
+    <h4 class="ui grey header">{{nickname}}</h4>
+    <div class="divider"></div>
+    <a class="item " href="/profile/{{id}}">Your Profile</a>
+    <a class="item " href="/edit-profile">Edit Profile</a>
+    <a class="item" routerLink='/change-password'>Change Password</a>
+    <div class="divider"></div>
+    <div class="item" (click)="logout()">Logout</div>
+  </div>
+</div>

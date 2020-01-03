@@ -1,0 +1,63 @@
+<div class="ui comments">
+  <h3 class="ui dividing header">Comments</h3>
+  <h4 class="header" *ngIf="!comments || comments.length === 0">We haven't any comments now. Write first!</h4>
+  <div class="comment" *ngFor="let comment of comments">
+    <a class="avatar">
+      <img [src]="comment.author.photoUrl">
+    </a>
+    <div class="content">
+      <a class="author">{{comment.author.nickname}}</a>
+      <div class="metadata">
+        <span class="date" *ngIf = "time_diff(convert_date(comment.dateTime), current_date) >= 7">{{comment.dateTime.hour}}:{{comment.dateTime.minute}}, {{comment.dateTime.dayOfMonth}} of {{comment.dateTime.month | titlecase}}</span>
+        <span class="date" *ngIf = "time_diff(convert_date(comment.dateTime), current_date) < 7 && time_diff(convert_date(comment.dateTime), current_date) >= 2">{{comment.dateTime.hour}}:{{comment.dateTime.minute}}, {{comment.dateTime.dayOfWeek | titlecase}}</span>
+        <span class="date" *ngIf = "time_diff(convert_date(comment.dateTime), current_date) >= 1 && time_diff(convert_date(comment.dateTime), current_date) < 2">{{comment.dateTime.hour}}:{{comment.dateTime.minute}}, Yesterday</span>
+        <span class="date" *ngIf = "time_diff(convert_date(comment.dateTime), current_date) < 1">{{comment.dateTime.hour}}:{{comment.dateTime.minute}}, Today</span>
+    </div>
+      <div class="text">
+        <p>{{comment.text}}</p>
+      </div>
+      <div class="actions">
+        <a class="reply" (click)="reply(comment.id)">Reply</a>
+        <a class="reply" (click)="delete(comment)" *ngIf="(my_id && comment.author.id === my_id) || my_role">Delete</a>
+      </div>
+    </div>
+    <div class="comments" *ngFor="let inner_comment of comment.replies">
+      <div class="comment">
+        <a class="avatar">
+          <img [src]="inner_comment.author.photoUrl">
+        </a>
+        <div class="content">
+          <a class="author">{{inner_comment.author.nickname}}</a>
+          <div class="metadata">
+            <span class="date" *ngIf = "time_diff(convert_date(inner_comment.dateTime), current_date) >= 7">{{inner_comment.dateTime.hour}}:{{inner_comment.dateTime.minute}}, {{inner_comment.dateTime.dayOfMonth}} of {{inner_comment.dateTime.month | titlecase}}</span>
+            <span class="date" *ngIf = "time_diff(convert_date(inner_comment.dateTime), current_date) < 7 && time_diff(convert_date(inner_comment.dateTime), current_date) >= 2">{{inner_comment.dateTime.hour}}:{{inner_comment.dateTime.minute}}, {{inner_comment.dateTime.dayOfWeek | titlecase}}</span>
+            <span class="date" *ngIf = "time_diff(convert_date(inner_comment.dateTime), current_date) >= 1 && time_diff(convert_date(inner_comment.dateTime), current_date) < 2">{{inner_comment.dateTime.hour}}:{{inner_comment.dateTime.minute}}, Yesterday</span>
+            <span class="date" *ngIf = "time_diff(convert_date(inner_comment.dateTime), current_date) < 1">{{inner_comment.dateTime.hour}}:{{inner_comment.dateTime.minute}}, Today</span>
+        </div>
+          <div class="text">
+            {{inner_comment.text}}
+          </div>
+          <div class="actions">
+            <a class="reply" (click)="delete_inner(comment, inner_comment)" *ngIf="(my_id && inner_comment.author.id === my_id) || my_role">Delete</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ui basic buttons" style="margin-left: 53%;" *ngIf="pages_count > 1">
+    <div class="ui button" [ngClass]="{ 'disabled' : page_number === 0 }" (click)="previous()">Newer</div>
+    <div class="ui button" [ngClass]="{ 'disabled' : page_number >= (pages_count - 1) }" (click)="next()">Older</div>
+  </div>
+  <div class="ui reply form">
+    <div class="field" id="commentsField">
+      <textarea placeholder="Ask something.." maxlength="256" [(ngModel)]="comment_text"></textarea>
+    </div>
+    <button *ngIf="!this.reply_id || this.reply_id.length === 0" (click)="send_comment()" (ngClass)="{ 'disabled' : !comment_text || comment_text.length === 0 }" class="ui blue labeled submit icon button">
+      <i class="paper plane outline icon"></i> Send
+    </button>
+    <button *ngIf="this.reply_id && this.reply_id.length > 5" (click)="send_comment()" (ngClass)="{ 'disabled' : !comment_text || comment_text.length === 0 }" class="ui red labeled submit icon button">
+      <i class="paper plane outline icon"></i> Reply
+    </button>
+    <a (click)="cancel_reply()" *ngIf="this.reply_id && this.reply_id.length > 5" style="margin-left: 5%;">Cancel</a>
+  </div>
+</div>

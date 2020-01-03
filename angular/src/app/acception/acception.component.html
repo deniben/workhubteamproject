@@ -1,0 +1,36 @@
+<div style="margin-left: 300px; margin-top: 120px;">
+
+  <div class="ui icon message" *ngIf="profiles.length === 0">
+    <p class="header">Nothing here yet...</p>
+  </div>
+
+  <div class="ui special cards" >
+    <div class="card"  *ngFor="let app of profiles  | paginate: { itemsPerPage: pagesCount, currentPage: pageNumber, totalItems: pagesCount * pagesCount }; let i = index ">
+
+      <div class="content">
+        <h3>
+          <b> {{ app.firstName }} {{app.lastName}}</b><img class="right floated mini ui image"
+                                                       style="width: 80px; height: 80px" [src]="app.photoUrl">
+        </h3>
+        <h5>{{app.nickname}}</h5>
+        <div class="extra content">
+          <br/>
+          <br/>
+          <div class="ui two buttons">
+           <div class="ui basic green button" (click)=submitMembers(app.id,i)>Confirm</div>
+            <div class="ui basic red button" (click)=rejectMembers(app.id,i)>Reject</div>
+            <br/>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ui buttons" style='margin-right: 60%; margin-top: 5%;'>
+
+
+    <div *ngIf="pagesCount > 1" style=" margin-bottom:0.5%; margin-top: 4%;">
+      <pagination-controls (pageChange)="change_page($event)"></pagination-controls>
+    </div>
+  </div>
+</div>

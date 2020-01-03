@@ -1,0 +1,89 @@
+.ui.vertical.stripe p {
+    font-size: 1.33em;
+}
+
+.ui.vertical.stripe .horizontal.divider {
+    margin: 3em 0em;
+}
+
+.ui.vertical.stripe h3 {
+    font-size: 2em;
+}
+
+.ui.vertical.stripe {
+    padding: 8em 0em;
+}
+
+.ui.vertical.stripe .button+h3, .ui.vertical.stripe p+h3 {
+    margin-top: 3em;
+}
+
+.ui.vertical.stripe .floated.image {
+    clear: both;
+}
+
+.quote.stripe.segment {
+    padding: 0em;
+}
+
+.quote.stripe.segment .grid .column {
+    padding-top: 5em;
+    padding-bottom: 5em;
+}
+
+.projects-segment {
+    position: relative;
+    -webkit-box-shadow: 0px 1px 2px 0 rgba(34, 36, 38, 0.15);
+    box-shadow: 0px 1px 2px 0 rgba(34, 36, 38, 0.15);
+    margin: 1rem 0em;
+    padding: 1em 1em;
+    border-radius: 0.28571429rem;
+    border: 1px solid rgba(34, 36, 38, 0.15);
+}
+
+.ui.grid>.row>img, .ui.grid>.row>.column>img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.ui.large.image {
+    width: 450px;
+    height: auto;
+    font-size: 1.14285714rem;
+}
+
+.ui.column.grid>[class*="six wide"].column {
+    width: 37.5% !important;
+}
+
+.column>img {
+    max-width: 100%;
+}
+
+.skills-grid {
+    margin-left: auto;
+    margin-top: auto;
+}
+
+.skills-column {
+    background: rgb(213, 214, 209);
+    border: 1px solid #FFFFFF;
+    border-radius: 15px;
+    width: auto!important;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+}
+
+.project-description {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+}
+
+
+.project-row{
+    text-indent: 25px;
+}

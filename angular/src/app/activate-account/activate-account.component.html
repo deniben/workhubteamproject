@@ -1,0 +1,12 @@
+<div class="ui inverted segment" style="position: sticky; top: 0; z-index: 100;">
+  <div class="ui inverted secondary pointing menu">
+    <a style="margin-right: 2%;"><font color='#FFEB46' style="font-family: 'Source Code Pro', monospace; font-size: 20px; color: white;"><b>WorkHub</b><img class="ui avatar image" src="assets/1910134.png" style="width: 35px; height: auto; margin-bottom: 8%;"/></font></a>
+  </div>
+</div>
+<div>
+<div style="text-align : center">
+  <h2 class="ui header" style="margin-top: 15%;"><i class="check circle icon" *ngIf="success" style="color: green;"></i> {{message}}</h2>
+  <a routerLink="/create-profile" *ngIf="success" class="ui primary button" style="margin-top: 5%;">
+    Continue
+  </a>
+</div>

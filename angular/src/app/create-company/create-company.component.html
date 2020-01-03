@@ -1,0 +1,76 @@
+<div class="ui inverted segment">
+    <div class="ui inverted secondary pointing menu">
+        <a style="margin-right: 2%;">
+            <font color='#FFEB46' style="font-family: 'Source Code Pro', monospace; font-size: 20px; color: white;">
+                <b>WorkHub</b><img class="ui avatar image" src="assets/1910134.png" style="width: 35px; height: auto; margin-bottom: 8%;" /></font>
+        </a>
+    </div>
+</div>
+
+<p-messages [(value)]="msgs"></p-messages>
+<form [formGroup]="createCompanyForm" (ngSubmit)="createCompany(createCompanyForm.value)" class="ui form" style="margin-left: 3%; width: 30%;">
+    <h1 id="companyTitle">Add your company details</h1>
+    <div class="field succ-messg" *ngIf="showMsg">
+        <div class="ui positive message">
+            <i class="close icon"></i>
+            <div class="header">
+                Company was created successfully!
+            </div>
+        </div>
+    </div>
+    <div class="field error-messg" *ngIf="showErrMsg">
+        <div class="ui negative message">
+            <i class="close icon"></i>
+            <div class="header">
+                Please fix the errors below!
+            </div>
+        </div>
+    </div>
+    <div style="margin: 0 auto;">
+        <div style="margin-top: 100px;">
+            <div class="field">
+                <label>Company Name</label>
+                <input type="text" formControlName="companyName" class="form-control" [ngClass]="{'is-invalid' : submitted && createCompanyForm.controls.companyName.errors}" placeholder="Your company name" />
+                <div *ngIf="createCompanyForm.controls.companyName.invalid &&(createCompanyForm.controls.companyName.dirty || createCompanyForm.controls.companyName.touched)">
+                    <div *ngIf="createCompanyForm.controls.companyName.errors.required">
+                        <p class="err-msg">Company name is required</p>
+                    </div>
+                    <div *ngIf="createCompanyForm.controls['companyName'].hasError('maxlength') || createCompanyForm.controls['companyName'].hasError('minlength')">
+                        <p class="err-msg">Company name shound have min=3 symbols and max=30</p>
+                    </div>
+                </div>
+            </div>
+            <div class="field" style="margin-top: 5%;">
+                <label>Company Description</label>
+                <textarea rows="4" cols="50" formControlName="companyDescription" class="form-control" [ngClass]="{ 'is-invalid': submitted && createCompanyForm.controls.companyDescription.errors }" placeholder="Your company name"></textarea>
+                <div *ngIf="createCompanyForm.controls.companyDescription.invalid &&(createCompanyForm.controls.companyDescription.dirty || createCompanyForm.controls.companyDescription.touched)">
+                    <div *ngIf="createCompanyForm.controls.companyDescription.errors.required">
+                        <p class="err-msg">Company description is required</p>
+                    </div>
+                    <div *ngIf="createCompanyForm.controls.companyDescription.hasError('maxlength') || createCompanyForm.controls.companyDescription.hasError('minlength')">
+                        <p class="err-msg">Company description shound have min=25 symbols and max=2000</p>
+                    </div>
+                </div>
+            </div>
+            <div class="field" style="margin-top: 5%;" *ngIf="showSkills">
+                <label>Skills</label>
+                <div class="ui segment">
+                    <app-skills-multiselect></app-skills-multiselect>
+                </div>
+            </div>
+            <div class="field" style="margin-top: 5%;">
+                <label>Company photo</label>
+                <div class="ui segment">
+                    <app-fileload [parent]="createCompanyForm" [photoHeight]="1" [photoWidth]="1"></app-fileload>
+                    <div *ngIf="createCompanyForm.controls.photoUrl.errors?.required">
+                        <p class="err-msg"> You must enter photo </p>
+                    </div>
+                </div>
+            </div>
+            <div class="field" style="margin-top: 5%;">
+                <button [disabled]="createCompanyForm.controls.companyDescription.invalid || createCompanyForm.controls.companyName.invalid || createCompanyForm.controls.photoUrl.invalid" type="submit" class="ui primary button">Create</button>
+                <a routerLink="/decision" class="ui button">Cancel</a>
+            </div>
+        </div>
+    </div>
+</form>

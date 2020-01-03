@@ -1,0 +1,15 @@
+.card {
+  box-shadow: 6px 6px 8px 4px rgba(5, 5, 5, 0.2);
+  max-width: 200px;
+  margin: auto;
+  text-align:left;
+  display: inline-block;
+  margin-left: 20px;
+  height: 190px;
+  border:khaki;
+
+
+}
+.button:hover{
+  border-color: #0099ff;
+}

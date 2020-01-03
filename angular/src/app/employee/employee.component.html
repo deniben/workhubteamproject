@@ -1,0 +1,125 @@
+<div class="ui top inverted dark fixed menu" style="position: fixed;  ">
+    <a style="margin-right: 2%; display:flex; margin-left:4%; color:white; margin-top:1.3%; margin-bottom: 1%; margin-left: 1%; font-family: 'Source Code Pro', monospace; font-size: 20px;"><b>WorkHub</b></a>
+    <a class="active item " routerLink='/employee'>Home</a>
+    <a class="item" routerLink="/employee/my-company">
+        My Company
+    </a>
+    <div class="right menu">
+        <app-profile-view style="margin: 10px 15px 8px 10px"></app-profile-view>
+    </div>
+</div>
+
+<div class="ui left fixed large vertical menu" style="z-index:1; background-image: url(https://happywall-img-gallery.imgix.net/315/dimmig_skog_svartvit_display.jpg);">
+    <a class="active item" routerLink='/employee' style="margin-top: 70px;"><i class="home icon"></i> Home</a>
+    <a class="item" routerLink='/employee/my-projects'><i class="briefcase icon"></i>My Projects
+        <app-new-projects-notifications></app-new-projects-notifications></a>
+    <a class="item" routerLink='/employee/requests'><i class="comments icon"></i>Requests</a>
+    <a class="item" routerLink='/employee/company/requests'><i class="users icon"></i>Membership requests</a>
+</div>
+
+<div style="height: 80%; min-height: 80%; position: relative;">
+    <form [formGroup]="searchForm" class="frm form-group" (ngSubmit)="search(searchForm.value)">
+        <div class="ui icon input">
+            <input type="text" formControlName="name" class="form-control" placeholder="Search...">
+            <i class="search icon"></i>
+        </div>
+    </form>
+
+    <h3 class="header" style="margin-left: 35%; margin-top: 5%; position: relative;" *ngIf="!all_projects || all_projects.length === 0">We haven't any projects yet.. Try later
+        <i class="hourglass start icon" style='color: green;'></i></h3>
+
+    <div class="ui grid" style="margin-left: 25%; margin-top: 1%; position: relative;">
+        <div class="six wide column">
+
+            <div class="ui divided items">
+
+                <div class="item" *ngFor="let project of all_projects_left" style="max-width: 500px; height: 150px;">
+                    <div class="image">
+                        <img [src]="project.photo" style="width: 175px; height: 108.6px;">
+                    </div>
+                    <div class="content">
+                        <p class="header">{{project.name}}</p>
+                        <div class="meta">
+                            <span class="cinema">by {{project.company.name}}</span>
+                        </div>
+                        <div class="description" [innerHTML]="project.description">
+                        </div>
+                        <div class="extra">
+                            <a class="ui right floated primary button" [routerLink]="'/employee/project/' + project.id">
+              Details
+              <i class="right chevron icon"></i>
+            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+        <div class="six wide column">
+
+            <div class="ui divided items">
+                <div class="item" *ngFor="let project of all_projects_right | paginate: { itemsPerPage: page_size, currentPage: page_number, totalItems: number_of_pages * number_of_pages }" style="max-width: 500px; height: 150px;">
+                    <div class="image">
+                        <img [src]="project.photo" style="width: 175px; height: 108.6px;">
+                    </div>
+                    <div class="content">
+                        <a class="header">{{project.name}}</a>
+                        <div class="meta">
+                            <span class="cinema">by {{project.company.name}}</span>
+                        </div>
+                        <div class="description" [innerHTML]="project.description">
+                        </div>
+                        <div class="extra">
+                            <a class="ui right floated primary button" [routerLink]="'/employee/project/' + project.id">
+              Details
+              <i class="right chevron icon"></i>
+            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <div *ngIf="number_of_pages > 1" style="margin-left: 46%; margin-bottom:0.5%; margin-top: 2%;">
+        <pagination-controls (pageChange)="change_page($event)"></pagination-controls>
+    </div>
+
+</div>
+
+<div *ngIf="popular.length > 0" style="width: 100%; margin-left: 13%; position: relative; bottom: 0;">
+
+    <div class="ui segment" style="background-color: #EDEBED; font-family: 'Ubuntu', sans-serif; position: relative;">
+        <div class="ui left internal attached rail" style='margin-left: 120px; font-size: 15px;'>
+            <br/><b>Recommendations</b>
+        </div>
+
+        <div class="ui three stackable cards" style="margin-top: 1%; margin-left: 200px;">
+
+            <div class="card" *ngFor="let project of popular" style="margin-left: 20px; width: 250px; margin-top: 30px;">
+                <div class="ui fluid image">
+                    <div class="ui blue ribbon label" *ngIf="project.by_skill">
+                        Based on your skills
+                    </div>
+                    <img [src]="project.photo" style="width: 250px; height: 163px">
+                </div>
+                <div class="content">
+                    <a class="header" routerLink="/employee/project/{{project.id}}">{{project.project}}</a>
+                    <div class="meta">
+                        <span class="date">by {{project.companyName}}</span>
+                    </div>
+                </div>
+                <div class="extra content">
+                    <a>
+                        <p>budget <b>${{project.budget}}</b></p>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>

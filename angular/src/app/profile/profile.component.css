@@ -1,0 +1,27 @@
+.form {
+  margin-top: 2%;
+  width: 50%;
+  left: 25%;
+}
+
+.btn {
+  margin-top: 5%;
+}
+
+.alert{
+  width: 50%;
+}
+
+.act-frm {
+  margin-top: 10%;
+}
+
+.form {
+  margin-top: 5%;
+  margin-left: 5%;
+  width: 40%;
+}
+
+.err-msg {
+  color : red;
+}

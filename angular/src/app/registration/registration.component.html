@@ -1,0 +1,83 @@
+<app-header-for-non-auth></app-header-for-non-auth>
+
+<div *ngIf="message" class="ui negative message">
+  <i class="close icon"></i>
+  <div class="header">
+     {{message}}
+  </div>
+</div>
+
+<div style="margin-left: auto; margin-right: auto; width: 850px; margin-top: 5%;">
+
+  <div class="ui steps" style="margin-top: 5%;">
+    <div class="active step">
+      <i class="unlock alternate icon"></i>
+      <div class="content">
+        <div class="title">Registration</div>
+        <div class="description">Create account in our system</div>
+      </div>
+    </div>
+    <div class="step">
+      <i class="address card icon"></i>
+      <div class="content">
+        <div class="title">Profile filling</div>
+        <div class="description">Provide your personal information</div>
+      </div>
+    </div>
+    <div class="step">
+      <i class="briefcase icon"></i>
+      <div class="content">
+        <div class="title">Join or create company</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div *ngIf="!activation">
+  <form [formGroup]="registrationForm" (ngSubmit)="register(registrationForm.value)" class="ui form" style="margin-left: 33%; width: 30%;">
+    <div class="field">
+      <label>Email</label>
+      <input type="text" class="form-control" formControlName="username" (ngModelChange)="emailInUseError=false" (change)="sent=false" placeholder="example@mail.com" [ngClass]="{'is-invalid' : submitted && registrationForm.controls.username.errors}" >
+      <div *ngIf="submitted && registrationForm.controls.username.errors">
+        <p class="err-msg">Invalid email address</p>
+      </div>
+      <div *ngIf="emailInUseError && !(submitted && registrationForm.controls.username.errors)">
+        <p class="err-msg">User with such email already exists</p>
+      </div>
+    </div>
+      <div class="field">
+        <label>Password</label>
+        <input type="password" formControlName="password" class="form-control" (change)="sent=false"  placeholder="Password" [ngClass]="{'is-invalid' : submitted && registrationForm.controls.password.errors}">
+        <div *ngIf="submitted && registrationForm.controls.password.errors">
+          <p class="err-msg">Password must be at least 6 chars long and contain at least 1 lower case letter, 1 upper case letter and 1 digit</p>
+        </div>
+      </div>
+      <div class="field">
+        <label>Repeat Password</label>
+        <input type="password" formControlName="repeatedPassword" class="form-control" (change)="sent=false" placeholder="Repeat password" [ngClass]="{'is-invalid' : submitted && registrationForm.controls.repeatedPassword.errors}">
+        <div *ngIf="submitted && registrationForm.controls.repeatedPassword.errors">
+          <p class="err-msg">Password must be at least 6 chars long</p>
+        </div>
+        <div *ngIf="submitted && !registrationForm.controls.repeatedPassword.errors && !passwordMatch()">
+          <p class="err-msg">Passwords must match</p>
+        </div>
+        <div class="ui message" style="margin-top: 5%;">
+          <div class="header">
+            Required:
+          </div>
+          <ul class="list">
+            <li>Minimal password length - 6 chars</li>
+            <li>Password must contain at least 1 lower case letter, 1 upper case letter and 1 digit</li>
+          </ul>
+        </div>
+      </div>
+      <button class="ui button" type="submit" style="margin-top: 5%;">
+        Register
+      </button>
+  </form>
+</div>
+
+<div *ngIf="activation" style="text-align:center; margin-top: 10%;">
+  <h2 class="ui header">Thank you for registration. To activate your account, please, follow the link in mail</h2>
+</div>

@@ -1,0 +1,213 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 10.7
+-- Dumped by pg_dump version 10.7
+
+-- Started on 2019-07-26 12:13:47
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- TOC entry 2919 (class 0 OID 110625)
+-- Dependencies: 199
+-- Data for Name: company; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+
+--
+-- TOC entry 2918 (class 0 OID 110617)
+-- Dependencies: 198
+-- Data for Name: user_info; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.user_info VALUES (2, 'michaeller.2012@gmail.com', '$2a$10$xbVsJPYSsCXnnfe89B69U.Syx3qv1fjfRmJ6vH/wsH79LNolE/RwK', true);
+INSERT INTO public.user_info VALUES (3, 'mike@gmail.com', '$2a$10$SJwnKmUZYBZgZbGM/iSycOdl3mLDejtoans1GQW6eTaLY1ZLEZkPu', true);
+INSERT INTO public.user_info VALUES (4, 'mike@admfa.dafda', '$2a$10$CLC3v0OYmJJp2FPnEfUokecsrIIC2Jfv/wKqKCEpnGRcEFXiyfHDm', true);
+INSERT INTO public.user_info VALUES (5, 'mike@mail.ru', '$2a$10$tUuab4cd9syyiunEa0kS3udq2Wwiz7ZwoxlEIC/.IkQ8eVJokvTm.', true);
+INSERT INTO public.user_info VALUES (6, 'michaeller.2012@gmail.comma', '$2a$10$JtRvJ7jUwdjwi5RQgfRZ/eXziWMjX649TcolsctdU3goEoNMiEDTa', true);
+INSERT INTO public.user_info VALUES (7, 'micha@aa.bb', '$2a$10$Ywo/26/0E58nuNtj7l5nNOSLj1V3QG1jikPYtykZSlAvtKOE.tYzi', true);
+INSERT INTO public.user_info VALUES (8, 'kiki@a.com', '$2a$10$FI8x/Xtkb8EVhInMl.9Zcuf0yzfrDVnpggZkrEpJC/pOnIlRuNo2q', true);
+INSERT INTO public.user_info VALUES (9, 'migsdfg@dasgfdnsl.sdgds', '$2a$10$IAAdcmN1bEObD9GzHQRZ.OHCoTdrlhV1Fl7xbCT9FhtPhZea1ic6u', true);
+INSERT INTO public.user_info VALUES (10, 'jojo@gmail.com', '$2a$10$kLRWEx4I1AvEZeBRDokEaOACnQq2YmQsRcidJmOy5zTaqoA3maYrK', true);
+INSERT INTO public.user_info VALUES (11, 'michaeller.2012@gmail.asa', '$2a$10$xkV6qtGntbHkK/fX.7yb..RJc68yWuH.aP0rkCCI.TjhyW.YcQGLG', true);
+INSERT INTO public.user_info VALUES (12, 'fdaf@fda.dfg', '$2a$10$jNvWHbPkVZYH6umlu7kNC.oHlAcl6pt6LyUkIfevAnFQEVn0UpUl.', false);
+INSERT INTO public.user_info VALUES (13, 'mdaa@ads.ccda', '$2a$10$ogjCVCmNpE47xhzFYPKGwOHmb5UwsAiBe0Z1Nvw6znNS3Wn9GCdii', false);
+INSERT INTO public.user_info VALUES (14, 'sa@sa.fad', '$2a$10$EqYooYpPLNBneUHpTdbTzey3UXqYVzinkU9sn149JV1tmrBcXuOkS', false);
+INSERT INTO public.user_info VALUES (15, 'asdfaf@a.aa', '$2a$10$eLCUQnVgl088XpQ8IWRc.e73wWC43Os573F3a9A/zyPu4bXfVFB6.', false);
+INSERT INTO public.user_info VALUES (29, 'dao@dao.dao', '$2a$10$MwxyhKdfRcNrvOXnIOfzxeFuZ3UVjemxb2HxqZfrTYV4YN5YjTcXa', true);
+INSERT INTO public.user_info VALUES (41, 'michaeller.2012@gmail.coms', '$2a$10$Sduc.PNTIKhim3zmzZJ67.6u3.8ITUHYH4o.H6eA0OjzBjzBUQFpK', true);
+
+
+--
+-- TOC entry 2917 (class 0 OID 110609)
+-- Dependencies: 197
+-- Data for Name: profile; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.profile VALUES (1, 'Mykhailo', 'Palahuta', 2, false, 'drofff', '', 0, false);
+
+
+--
+-- TOC entry 2928 (class 0 OID 110751)
+-- Dependencies: 208
+-- Data for Name: companies; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.companies VALUES (0, 3, 'The best dev company', 'SoftServe', 'EMPLOYER', NULL);
+INSERT INTO public.companies VALUES (1, 4, 'PayDay', 'PayDatInc', 'EMPLOYER', NULL);
+
+
+--
+-- TOC entry 2933 (class 0 OID 110835)
+-- Dependencies: 213
+-- Data for Name: file; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+
+
+--
+-- TOC entry 2920 (class 0 OID 110633)
+-- Dependencies: 200
+-- Data for Name: owned_companies; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+
+
+--
+-- TOC entry 2922 (class 0 OID 110646)
+-- Dependencies: 202
+-- Data for Name: project_type; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.project_type VALUES (0, 'Web Development');
+INSERT INTO public.project_type VALUES (1, 'Spring');
+INSERT INTO public.project_type VALUES (2, 'Administrative');
+
+
+--
+-- TOC entry 2921 (class 0 OID 110638)
+-- Dependencies: 201
+-- Data for Name: project; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.project VALUES (66, 435.54000000000002, 'Nice one', NULL, NULL, '2019-07-19', 'Desktop app', 'NEW', 0, NULL, 0, 'teamwork-in-the-workplace-rh.jpg');
+INSERT INTO public.project VALUES (67, 5444, 'Web dev', NULL, NULL, '2019-07-24', 'Web app', 'NEW', 0, NULL, 1, 'web.jpg');
+INSERT INTO public.project VALUES (68, 11111, 'Java server', NULL, NULL, '2019-07-24', 'Java app', 'NEW', 0, NULL, 0, 'java.png');
+INSERT INTO public.project VALUES (69, 15621, 'Help with event', NULL, NULL, '2019-07-24', 'Event organisation', 'NEW', 0, NULL, 0, 'adm.jpg');
+INSERT INTO public.project VALUES (70, 150, 'Replace me with uber work cos I am going to rest for 2 days', NULL, NULL, '2019-07-24', 'Driver uber', 'NEW', 0, NULL, 0, 'download.jfif');
+
+
+
+--
+-- TOC entry 2930 (class 0 OID 110803)
+-- Dependencies: 210
+-- Data for Name: skills; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.skills VALUES (0, 'Java');
+
+
+--
+-- TOC entry 2923 (class 0 OID 110651)
+-- Dependencies: 203
+-- Data for Name: proposed_skills; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.proposed_skills VALUES (0, 0);
+
+
+--
+-- TOC entry 2924 (class 0 OID 110656)
+-- Dependencies: 204
+-- Data for Name: required_skills; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.required_skills VALUES (68, 0);
+
+
+--
+-- TOC entry 2926 (class 0 OID 110666)
+-- Dependencies: 206
+-- Data for Name: statement; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+
+
+--
+-- TOC entry 2932 (class 0 OID 110820)
+-- Dependencies: 212
+-- Data for Name: user_recommendations; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.user_recommendations VALUES (30, 2, 1, 2);
+INSERT INTO public.user_recommendations VALUES (27, 0, 1, 0);
+INSERT INTO public.user_recommendations VALUES (28, 8, 1, 1);
+
+
+--
+-- TOC entry 2927 (class 0 OID 110671)
+-- Dependencies: 207
+-- Data for Name: user_role; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.user_role VALUES (2, 'USER');
+INSERT INTO public.user_role VALUES (3, 'USER');
+INSERT INTO public.user_role VALUES (4, 'USER');
+INSERT INTO public.user_role VALUES (5, 'USER');
+INSERT INTO public.user_role VALUES (6, 'USER');
+INSERT INTO public.user_role VALUES (7, 'USER');
+INSERT INTO public.user_role VALUES (8, 'USER');
+INSERT INTO public.user_role VALUES (9, 'USER');
+INSERT INTO public.user_role VALUES (10, 'USER');
+INSERT INTO public.user_role VALUES (11, 'USER');
+INSERT INTO public.user_role VALUES (12, 'USER');
+INSERT INTO public.user_role VALUES (13, 'USER');
+INSERT INTO public.user_role VALUES (14, 'USER');
+INSERT INTO public.user_role VALUES (15, 'USER');
+INSERT INTO public.user_role VALUES (29, 'USER');
+INSERT INTO public.user_role VALUES (41, 'USER');
+
+
+--
+-- TOC entry 2939 (class 0 OID 0)
+-- Dependencies: 209
+-- Name: companies_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.companies_id_seq', 1, false);
+
+
+--
+-- TOC entry 2940 (class 0 OID 0)
+-- Dependencies: 196
+-- Name: hibernate_sequence; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.hibernate_sequence', 41, true);
+
+
+--
+-- TOC entry 2941 (class 0 OID 0)
+-- Dependencies: 211
+-- Name: skills_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.skills_id_seq', 1, false);
+
+
+-- Completed on 2019-07-26 12:13:47
+
+--
+-- PostgreSQL database dump complete
+--
+

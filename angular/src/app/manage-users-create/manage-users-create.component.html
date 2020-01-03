@@ -1,0 +1,23 @@
+
+ <app-header></app-header>
+ 
+<div class="ui top attached tabular menu" style='margin-top: 120px;'>
+  <a class="item"  routerLink='/admin/users'>
+    Manage
+  </a>
+  <a class="active item">
+    Create
+  </a>
+</div>
+<div class="ui bottom attached segment">
+  <h4 class="header" *ngIf="done" style="margin-left: 35%; margin-top: 5%;"><i class="check circle icon" style="color: green"></i> New user successfully created! <a (click)="continue()">Continue creation</a></h4>
+  <form [formGroup]="create_user_form" (ngSubmit)="create(create_user_form.value)" class="ui form">
+    <div class="field" [ngClass]="{ 'disabled' : done }" style="width: 30%; margin-left: 35%; margin-top: 5%;">
+      <label>Email</label>
+      <input type="text" (keydown)="clear_err()" formControlName="email" placeholder="example@mail.com">
+      <p *ngIf="submitted && create_user_form.controls.email.errors" style='color: red'>Invalid email format</p>
+      <p *ngIf="user_exists" style='color: red'>User with such email already exists</p>
+    </div>
+    <button class="ui button" [ngClass]="{ 'disabled' : done }" type="submit" style="margin-left: 35%; margin-bottom: 10%;">Create</button>
+  </form>
+</div>

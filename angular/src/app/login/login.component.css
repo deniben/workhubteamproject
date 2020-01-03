@@ -1,0 +1,22 @@
+.form {
+	margin-top: 15%;
+	width: 50%;
+}
+
+.message {
+	width: 50%;
+}
+
+.err_msg {
+	color : red;
+	margin-top: 1%;
+}
+
+.google {
+	display: inline-block;
+  vertical-align: middle;
+  margin: 8px 0 10px 8px;
+  width: 18px;
+  height: 18px;
+  box-sizing: border-box;
+}

@@ -1,0 +1,214 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+    <changeSet author="dsteptc (generated)" id="1565692850304-1">
+        <createSequence sequenceName="companies_id_seq"/>
+    </changeSet>
+    <changeSet author="dsteptc (generated)" id="1565692850304-2">
+        <createSequence sequenceName="hibernate_sequence"/>
+    </changeSet>
+    <changeSet author="dsteptc (generated)" id="1565692850304-3">
+        <createSequence sequenceName="projecttype_id_seq"/>
+    </changeSet>
+    <changeSet author="dsteptc (generated)" id="1565692850304-4">
+        <createSequence sequenceName="skills_id_seq"/>
+    </changeSet>
+    <changeSet author="dsteptc (generated)" id="1565692850304-5">
+        <createTable tableName="blocked_ips">
+            <column name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="blocked_ips_pkey"/>
+            </column>
+            <column name="address" type="VARCHAR(255)"/>
+            <column name="date" type="date"/>
+            <column name="reason" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="dsteptc (generated)" id="1565692850304-6">
+        <createTable tableName="companies">
+            <column name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="companies_pkey"/>
+            </column>
+            <column name="mark_avg" type="BIGINT"/>
+            <column name="description" type="VARCHAR(255)"/>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="type" type="VARCHAR(255)"/>
+            <column name="owner_id" type="BIGINT"/>
+            <column name="blocked" type="BOOLEAN"/>
+            <column name="photo_url" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="dsteptc (generated)" id="1565692850304-7">
+        <createTable tableName="file">
+            <column name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="file_pkey"/>
+            </column>
+            <column name="title" type="VARCHAR(255)"/>
+            <column name="url_file" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="dsteptc (generated)" id="1565692850304-8">
+        <createTable tableName="profile">
+            <column name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="profile_pkey"/>
+            </column>
+            <column name="accepted" type="BOOLEAN"/>
+            <column name="first_name" type="VARCHAR(25)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="is_root" type="BOOLEAN"/>
+            <column name="last_name" type="VARCHAR(25)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="nickname" type="VARCHAR(25)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="photo_url" type="VARCHAR(255)"/>
+            <column name="company_id" type="BIGINT"/>
+            <column name="user_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="dsteptc (generated)" id="1565692850304-9">
+        <createTable tableName="project">
+            <column name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="project_pkey"/>
+            </column>
+            <column name="budget" type="FLOAT8"/>
+            <column name="description" type="VARCHAR(255)"/>
+            <column name="employeemark" type="BIGINT"/>
+            <column name="employermark" type="BIGINT"/>
+            <column name="expirydate" type="date"/>
+            <column name="name" type="VARCHAR(255)"/>
+            <column name="photo_url" type="VARCHAR(255)"/>
+            <column name="status" type="VARCHAR(255)"/>
+            <column name="creator_id" type="BIGINT"/>
+            <column name="employee_id" type="BIGINT"/>
+            <column name="type_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="dsteptc (generated)" id="1565692850304-10">
+        <createTable tableName="project_type">
+            <column name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="project_type_pkey"/>
+            </column>
+            <column name="name" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="dsteptc (generated)" id="1565692850304-11">
+        <createTable tableName="projectrequest">
+            <column name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="projectrequest_pkey"/>
+            </column>
+            <column name="employee_id" type="BIGINT"/>
+            <column name="employer_id" type="BIGINT"/>
+            <column name="project_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="dsteptc (generated)" id="1565692850304-12">
+        <createTable tableName="proposed_skills">
+            <column name="company_id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="proposed_skills_pkey"/>
+            </column>
+            <column name="skill_id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="proposed_skills_pkey"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="dsteptc (generated)" id="1565692850304-13">
+        <createTable tableName="required_skills">
+            <column name="project_id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="required_skills_pkey"/>
+            </column>
+            <column name="skill_id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="required_skills_pkey"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="dsteptc (generated)" id="1565692850304-14">
+        <createTable tableName="skills">
+            <column name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="skills_pkey"/>
+            </column>
+            <column name="name" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="dsteptc (generated)" id="1565692850304-15">
+        <createTable tableName="user_info">
+            <column name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="user_info_pkey"/>
+            </column>
+            <column name="is_active" type="BOOLEAN"/>
+            <column name="password" type="VARCHAR(255)"/>
+            <column name="username" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="dsteptc (generated)" id="1565692850304-16">
+        <createTable tableName="user_recommendations">
+            <column name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="user_recommendations_pkey"/>
+            </column>
+            <column name="valuation" type="FLOAT4"/>
+            <column name="profile_id" type="BIGINT"/>
+            <column name="project_type_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="dsteptc (generated)" id="1565692850304-17">
+        <createTable tableName="user_role">
+            <column name="user_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="roles" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="dsteptc (generated)" id="1565692850304-18">
+        <addUniqueConstraint columnNames="skill_id" constraintName="uk_tnifu1r9wpm73c5gpa8nyg0oy" tableName="proposed_skills"/>
+    </changeSet>
+    <changeSet author="dsteptc (generated)" id="1565692850304-19">
+        <addForeignKeyConstraint baseColumnNames="owner_id" baseTableName="companies" constraintName="fk2rnygfpf0ca7252gep0gd0itq" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="profile" />
+    </changeSet>
+    <changeSet author="dsteptc (generated)" id="1565692850304-20">
+        <addForeignKeyConstraint baseColumnNames="profile_id" baseTableName="user_recommendations" constraintName="fk3ujn1vowvpmtqgx3l2y5olb1a" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="profile" />
+    </changeSet>
+    <changeSet author="dsteptc (generated)" id="1565692850304-21">
+        <addForeignKeyConstraint baseColumnNames="company_id" baseTableName="profile" constraintName="fk4f2icjx0bevus365xaioo14gx" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="companies" />
+    </changeSet>
+    <changeSet author="dsteptc (generated)" id="1565692850304-22">
+        <addForeignKeyConstraint baseColumnNames="skill_id" baseTableName="required_skills" constraintName="fk4inem3msersanj1bkgp7b1hgs" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="skills" />
+    </changeSet>
+    <changeSet author="dsteptc (generated)" id="1565692850304-23">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="profile" constraintName="fk9c6o0i2wom50761484uhrqni6" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="user_info" />
+    </changeSet>
+    <changeSet author="dsteptc (generated)" id="1565692850304-24">
+        <addForeignKeyConstraint baseColumnNames="employer_id" baseTableName="projectrequest" constraintName="fkdofbm71dweqlrf9oq0yulpl55" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="companies" />
+    </changeSet>
+    <changeSet author="dsteptc (generated)" id="1565692850304-25">
+        <addForeignKeyConstraint baseColumnNames="type_id" baseTableName="project" constraintName="fkeaohcvks7ix2a3vbjj9mvaghx" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="project_type" />
+    </changeSet>
+    <changeSet author="dsteptc (generated)" id="1565692850304-26">
+        <addForeignKeyConstraint baseColumnNames="project_id" baseTableName="required_skills" constraintName="fkfu1g6rg1luupmuuj7xnxi6dcu" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="project" />
+    </changeSet>
+    <changeSet author="dsteptc (generated)" id="1565692850304-27">
+        <addForeignKeyConstraint baseColumnNames="employee_id" baseTableName="project" constraintName="fkfwq11dxwrexdea7sg3dttyq84" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="companies" />
+    </changeSet>
+    <changeSet author="dsteptc (generated)" id="1565692850304-28">
+        <addForeignKeyConstraint baseColumnNames="creator_id" baseTableName="project" constraintName="fkgrfaybenjkhnefl8y9sf96p4p" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="companies" />
+    </changeSet>
+    <changeSet author="dsteptc (generated)" id="1565692850304-29">
+        <addForeignKeyConstraint baseColumnNames="project_id" baseTableName="projectrequest" constraintName="fkipj7o2yktf43muqeydh4vndsy" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="project" />
+    </changeSet>
+    <changeSet author="dsteptc (generated)" id="1565692850304-30">
+        <addForeignKeyConstraint baseColumnNames="project_type_id" baseTableName="user_recommendations" constraintName="fkjp8ey7w6vc3jhqo1u1023pbwt" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="project_type" />
+    </changeSet>
+    <changeSet author="dsteptc (generated)" id="1565692850304-31">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="user_role" constraintName="fkm90yi1ak9h9tbct25k3km0hia" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="user_info" />
+    </changeSet>
+    <changeSet author="dsteptc (generated)" id="1565692850304-32">
+        <addForeignKeyConstraint baseColumnNames="company_id" baseTableName="proposed_skills" constraintName="fknwq7xv28skpddav5kpfvyxo64" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="companies" />
+    </changeSet>
+    <changeSet author="dsteptc (generated)" id="1565692850304-33">
+        <addForeignKeyConstraint baseColumnNames="skill_id" baseTableName="proposed_skills" constraintName="fkoga7edw0sv4c4lwo1wpefh7l2" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="skills" />
+    </changeSet>
+    <changeSet author="dsteptc (generated)" id="1565692850304-34">
+        <addForeignKeyConstraint baseColumnNames="employee_id" baseTableName="projectrequest" constraintName="fkq2xjyl0x4i374kk9d02ag4c3j" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="companies" />
+    </changeSet>
+</databaseChangeLog>

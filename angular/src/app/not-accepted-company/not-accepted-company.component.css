@@ -1,0 +1,51 @@
+
+.form {
+  margin-top: 30%;
+  width: 50%;
+  left: 25%;
+}
+
+.btn {
+  margin-top: 5%;
+}
+
+.alert {
+  width: 50%;
+}
+
+.act-frm {
+  margin-top: 10%;
+}
+
+.form {
+  margin-top: 10%;
+  width: 40%;
+}
+
+.err-msg {
+  color: red;
+}
+
+.c{
+  text-align: center;
+  display: block;
+  position: relative;
+  width:80%;
+  margin:100px auto;
+}
+.text{
+  font-size: 80px;
+  position: relative;
+  display: inline-block;
+  z-index: 2;
+  height: 110px;
+  letter-spacing: 5px;
+}
+.centered-element {
+  height: 680px;
+  width: 6800px;
+  left: 30%;
+  margin-left: -10px;
+  top: 30%;
+  margin-top: -50px;
+}
